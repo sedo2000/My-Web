@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Developer Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* تنسيقات أساسية */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+
+    canvas.background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    main {
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    aside {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    aside a {
+      color: white;
+      font-size: 24px;
+      transition: color 0.3s;
+    }
+
+    aside a:hover {
+      color: #00bcd4;
+    }
+
+    .main {
+      text-align: center;
+    }
+
+    #timedate {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin: 0;
+      background: linear-gradient(45deg, #00bcd4, #0097a7, #00bcd4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      margin: 10px 0;
+      background: linear-gradient(45deg, #00bcd4, #0097a7, #00bcd4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      color: white;
+      background: #00bcd4;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background: #0097a7;
+    }
+
+    .music-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .music-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background: #00bcd4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .music-button:hover {
+      background: #0097a7;
+    }
+
+    #profile-image-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px auto;
+    }
+
+    #profile-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid #00bcd4;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    #upload-image {
+      display: none;
+    }
+
+    #update-image-button {
+      display: none;
+      position: absolute;
+      right: -100px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 5px 10px;
+      font-size: 14px;
+      color: white;
+      background: #00bcd4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #update-image-button:hover {
+      background: #0097a7;
+    }
+
+    .gift-icon {
+      position: fixed;
+      bottom: 150px;
+      left: 20px;
+      font-size: 24px;
+      color: #00bcd4;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .gift-icon:hover {
+      color: #0097a7;
+    }
+
+    .welcome-message {
+      position: fixed;
+      bottom: 180px;
+      left: 60px;
+      background: #00bcd4;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .welcome-message.show {
+      display: block;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 14px;
+      color: #00bcd4;
+    }
+
+    /* تنسيقات النافذة المنبثقة */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+      position: relative;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #00bcd4;
+      cursor: pointer;
+    }
+
+    .close-popup:hover {
+      color: #0097a7;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- قسم وسائل التواصل الاجتماعي -->
+    <aside>
+      <a href="https://youtube.com/@ut8p?si=c8rGqdTkRxg_trC6" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/_lqec" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/fuckalliraq" target="_blank"><i class="fab fa-telegram"></i></a>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main">
+      <!-- صورة المستخدم -->
+      <div id="profile-image-container">
+        <img id="profile-image" src="https://i.ibb.co/dLLJPkD/IMG-0261.jpg" alt="Profile Image">
+        <input type="file" id="upload-image" accept="image/*" style="display: none;">
+        <button id="update-image-button">تحديث الصورة</button>
+      </div>
+
+      <!-- التاريخ والوقت -->
+      <div id="timedate">
+        <span id="month">January</span> <span id="day">1</span>, <span id="year">0</span>
+        <br />
+        <span id="hour">12</span> :<span id="min">00</span> :<span id="s">00</span> :<span id="millisec">000</span>
+      </div>
+
+      <!-- نص الترحيب -->
+      <div class="hero">
+        <h1>Hello! I'm Sajad,</h1>
+        <h2>a Web Developer</h2>
+      </div>
+
+      <!-- زر الانتقال -->
+      <a href="#projects" class="button" id="toMyWorkButton">To My Work</a>
+    </div>
+  </main>
+
+  <!-- زر تشغيل الأغنية -->
+  <div class="music-container">
+    <button class="music-button" onclick="toggleMusic()">
+      <i class="fas fa-music"></i> Play Music
+    </button>
+  </div>
+
+  <!-- أيقونة الهدية -->
+  <div class="gift-icon" onclick="showWelcomeMessage()">
+    <i class="fas fa-gift"></i>
+  </div>
+
+  <!-- النص الترحيبي -->
+  <div class="welcome-message" id="welcomeMessage">
+    مرحبا بك في موقعنا! يسرّنا دخولك. من فضلك قم بزيارتنا في وقت لاحق. لقد أحببناك!
+  </div>
+
+  <!-- نص في الأسفل -->
+  <footer>
+    By Sajad
+  </footer>
+
+  <!-- النافذة المنبثقة -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close-popup">&times;</span>
+      <p>#-sajad jawad | student | programmer👨‍💻</p>
+    </div>
+  </div>
+
+  <!-- عنصر الصوت -->
+  <audio id="background-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- خلفية الجسيمات المتحركة -->
+  <canvas class="background"></canvas>
+
+  <!-- مكتبة particles.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+
+  <!-- الكود الخاص بتحديث الوقت وتأثيرات الجسيمات -->
+  <script>
+    // تحديث الوقت بشكل ديناميكي
+    function updateTime() {
+      const now = new Date();
+      const month = now.toLocaleString('default', { month: 'long' });
+      const day = now.getDate();
+      const year = now.getFullYear();
+      const hour = now.getHours().toString().padStart(2, '0');
+      const min = now.getMinutes().toString().padStart(2, '0');
+      const sec = now.getSeconds().toString().padStart(2, '0');
+      const millisec = now.getMilliseconds().toString().padStart(3, '0');
+
+      document.getElementById('month').textContent = month;
+      document.getElementById('day').textContent = day;
+      document.getElementById('year').textContent = year;
+      document.getElementById('hour').textContent = hour;
+      document.getElementById('min').textContent = min;
+      document.getElementById('s').textContent = sec;
+      document.getElementById('millisec').textContent = millisec;
+    }
+
+    setInterval(updateTime, 1); // تحديث الوقت كل مللي ثانية
+
+    // تهيئة تأثيرات الجسيمات
+    window.onload = function() {
+      Particles.init({
+        selector: '.background',
+        color: '#00bcd4',
+        connectParticles: true,
+        maxParticles: 100,
+        sizeVariations: 3,
+      });
+    };
+
+    // التحكم في تشغيل وإيقاف الأغنية
+    const audio = document.getElementById('background-music');
+    const musicButton = document.querySelector('.music-button');
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+        musicButton.innerHTML = '<i class="fas fa-music"></i> Pause Music';
+      } else {
+        audio.pause();
+        musicButton.innerHTML = '<i class="fas fa-music"></i> Play Music';
+      }
+    }
+
+    // التحكم في رفع الصورة
+    const profileImage = document.getElementById('profile-image');
+    const uploadImage = document.getElementById('upload-image');
+    const updateImageButton = document.getElementById('update-image-button');
+
+    profileImage.addEventListener('click', (event) => {
+      event.preventDefault();
+      uploadImage.click();
+    });
+
+    uploadImage.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          profileImage.src = e.target.result;
+          updateImageButton.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    updateImageButton.addEventListener('click', () => {
+      alert('تم تحديث الصورة بنجاح!');
+    });
+
+    // إظهار النص الترحيبي عند النقر على أيقونة الهدية
+    function showWelcomeMessage() {
+      const welcomeMessage = document.getElementById('welcomeMessage');
+      welcomeMessage.classList.toggle('show');
+    }
+
+    // التحكم في النافذة المنبثقة
+    const toMyWorkButton = document.getElementById('toMyWorkButton');
+    const popup = document.getElementById('popup');
+    const closePopup = document.querySelector('.close-popup');
+
+    toMyWorkButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      popup.style.display = 'flex';
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+
+</html>
