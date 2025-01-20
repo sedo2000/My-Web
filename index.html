@@ -12,7 +12,7 @@
       margin: 0;
       font-family: Arial, sans-serif;
       color: white;
-      background: #1a1a1a;
+      background: #000; /* خلفية سوداء */
       overflow: hidden;
     }
 
@@ -57,10 +57,19 @@
       text-align: center;
     }
 
+    /* تنسيقات الوقت الجديدة */
     #timedate {
-      font-size: 20px;
+      font-size: 28px; /* زيادة حجم الخط */
       margin-bottom: 20px;
       text-align: center;
+      font-family: 'Courier New', Courier, monospace; /* تغيير نوع الخط */
+      color: #00bcd4; /* لون النص */
+      text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4; /* إضافة ظل للنص */
+    }
+
+    #timedate span {
+      display: inline-block;
+      margin: 0 5px;
     }
 
     .hero h1 {
@@ -137,7 +146,20 @@
       object-fit: cover;
       cursor: pointer;
       border: 2px solid #00bcd4;
-      animation: float 3s ease-in-out infinite;
+      animation: float 3s ease-in-out infinite; /* إضافة تأثير الطفو */
+    }
+
+    /* تعريف تأثير الطفو */
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px); /* تحريك الصورة لأعلى */
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
 
     #upload-image {
@@ -239,6 +261,125 @@
     .close-popup:hover {
       color: #0097a7;
     }
+
+    /* تنسيقات متجاوبة للهواتف */
+    @media (max-width: 768px) {
+      /* تعديل حجم الخطوط */
+      .hero h1 {
+        font-size: 36px; /* تصغير حجم العنوان الرئيسي */
+      }
+
+      .hero h2 {
+        font-size: 24px; /* تصغير حجم العنوان الثانوي */
+      }
+
+      #timedate {
+        font-size: 20px; /* تصغير حجم الوقت */
+      }
+
+      /* تعديل حجم الأزرار */
+      .button {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .music-button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+
+      /* تعديل حجم الصورة الشخصية */
+      #profile-image-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      /* تعديل موقع وسائل التواصل الاجتماعي */
+      aside {
+        left: 10px;
+        gap: 10px;
+      }
+
+      aside a {
+        font-size: 20px;
+      }
+
+      /* تعديل موقع أيقونة الهدية */
+      .gift-icon {
+        bottom: 100px;
+        left: 10px;
+      }
+
+      /* تعديل موقع النص الترحيبي */
+      .welcome-message {
+        bottom: 130px;
+        left: 40px;
+      }
+
+      /* تعديل موقع النص في الأسفل */
+      footer {
+        font-size: 12px;
+      }
+    }
+
+    /* تنسيقات متجاوبة للهواتف الصغيرة جدًا */
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 28px; /* تصغير حجم العنوان الرئيسي أكثر */
+      }
+
+      .hero h2 {
+        font-size: 20px; /* تصغير حجم العنوان الثانوي أكثر */
+      }
+
+      #timedate {
+        font-size: 18px; /* تصغير حجم الوقت أكثر */
+      }
+
+      /* تعديل حجم الأزرار */
+      .button {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      .music-button {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      /* تعديل حجم الصورة الشخصية */
+      #profile-image-container {
+        width: 80px;
+        height: 80px;
+      }
+
+      /* تعديل موقع وسائل التواصل الاجتماعي */
+      aside {
+        left: 5px;
+        gap: 5px;
+      }
+
+      aside a {
+        font-size: 18px;
+      }
+
+      /* تعديل موقع أيقونة الهدية */
+      .gift-icon {
+        bottom: 80px;
+        left: 5px;
+      }
+
+      /* تعديل موقع النص الترحيبي */
+      .welcome-message {
+        bottom: 110px;
+        left: 20px;
+      }
+
+      /* تعديل موقع النص في الأسفل */
+      footer {
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 
@@ -314,13 +455,13 @@
     Your browser does not support the audio element.
   </audio>
 
-  <!-- خلفية الجسيمات المتحركة -->
+  <!-- خلفية النجوم المتحركة -->
   <canvas class="background"></canvas>
 
-  <!-- مكتبة particles.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+  <!-- مكتبة Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- الكود الخاص بتحديث الوقت وتأثيرات الجسيمات -->
+  <!-- الكود الخاص بتحديث الوقت وخلفية النجوم المتحركة -->
   <script>
     // تحديث الوقت بشكل ديناميكي
     function updateTime() {
@@ -344,16 +485,50 @@
 
     setInterval(updateTime, 1); // تحديث الوقت كل مللي ثانية
 
-    // تهيئة تأثيرات الجسيمات
-    window.onload = function() {
-      Particles.init({
-        selector: '.background',
-        color: '#00bcd4',
-        connectParticles: true,
-        maxParticles: 100,
-        sizeVariations: 3,
-      });
-    };
+    // تهيئة خلفية النجوم المتحركة
+    let scene, camera, renderer, stars;
+
+    function initStars() {
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 5;
+
+      renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('.background'), antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000000, 1); // خلفية سوداء
+
+      // إضافة النجوم
+      stars = new THREE.Group();
+      for (let i = 0; i < 1000; i++) {
+        const geometry = new THREE.SphereGeometry(0.1, 24, 24);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const star = new THREE.Mesh(geometry, material);
+
+        star.position.x = (Math.random() - 0.5) * 500;
+        star.position.y = (Math.random() - 0.5) * 500;
+        star.position.z = (Math.random() - 0.5) * 500;
+
+        stars.add(star);
+      }
+      scene.add(stars);
+
+      // إضافة الحركة
+      function animate() {
+        requestAnimationFrame(animate);
+
+        stars.rotation.x += 0.005;
+        stars.rotation.y += 0.005;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
+
+    // بدء الخلفية المتحركة بمجرد تحميل DOM
+    document.addEventListener('DOMContentLoaded', function() {
+      initStars();
+    });
 
     // التحكم في تشغيل وإيقاف الأغنية
     const audio = document.getElementById('background-music');
