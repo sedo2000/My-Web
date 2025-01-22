@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Developer Portfolio</title>
+  <title>Sajad (jawad)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* تنسيقات أساسية */
@@ -33,53 +33,32 @@
       text-align: center;
     }
 
-    aside {
-      position: fixed;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    aside a {
-      color: white;
-      font-size: 24px;
-      transition: color 0.3s;
-    }
-
-    aside a:hover {
-      color: #00bcd4;
-    }
-
     .main {
       text-align: center;
-    }
-
-    /* تنسيقات الوقت الجديدة */
-    #timedate {
-      font-size: 28px; /* زيادة حجم الخط */
-      margin-bottom: 20px;
-      text-align: center;
-      font-family: 'Courier New', Courier, monospace; /* تغيير نوع الخط */
-      color: #00bcd4; /* لون النص */
-      text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4; /* إضافة ظل للنص */
-    }
-
-    #timedate span {
-      display: inline-block;
-      margin: 0 5px;
     }
 
     .hero h1 {
       font-size: 48px;
       margin: 0;
-      background: linear-gradient(45deg, #00bcd4, #0097a7, #00bcd4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
+      animation: changeColor 3s infinite; /* تغيير اللون كل 3 ثوانٍ */
+    }
+
+    @keyframes changeColor {
+      0% {
+        color: #00bcd4; /* أزرق */
+      }
+      25% {
+        color: #ff4081; /* وردي */
+      }
+      50% {
+        color: #00bcd4; /* أزرق */
+      }
+      75% {
+        color: #ff4081; /* وردي */
+      }
+      100% {
+        color: #00bcd4; /* أزرق */
+      }
     }
 
     .hero h2 {
@@ -109,12 +88,7 @@
     }
 
     .music-container {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      margin-top: 20px; /* تباعد بين الزرين */
     }
 
     .music-button {
@@ -145,8 +119,14 @@
       border-radius: 50%;
       object-fit: cover;
       cursor: pointer;
-      border: 2px solid #00bcd4;
-      animation: float 3s ease-in-out infinite; /* إضافة تأثير الطفو */
+      border: 4px solid #ffffff; /* إطار أبيض */
+      animation: float 3s ease-in-out infinite, changeBorderColor 3s infinite; /* تأثير الطفو وتغيير لون الإطار */
+      transition: transform 0.3s ease-in-out; /* تأثير التكبير */
+    }
+
+    /* تأثير التكبير عند الضغط */
+    #profile-image:active {
+      transform: scale(1.5); /* تكبير الصورة بنسبة 150% */
     }
 
     /* تعريف تأثير الطفو */
@@ -162,58 +142,20 @@
       }
     }
 
-    #upload-image {
-      display: none;
-    }
-
-    #update-image-button {
-      display: none;
-      position: absolute;
-      right: -100px;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 5px 10px;
-      font-size: 14px;
-      color: white;
-      background: #00bcd4;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    #update-image-button:hover {
-      background: #0097a7;
-    }
-
-    .gift-icon {
-      position: fixed;
-      bottom: 150px;
-      left: 20px;
-      font-size: 24px;
-      color: #00bcd4;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .gift-icon:hover {
-      color: #0097a7;
-    }
-
-    .welcome-message {
-      position: fixed;
-      bottom: 180px;
-      left: 60px;
-      background: #00bcd4;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 14px;
-      display: none;
-    }
-
-    .welcome-message.show {
-      display: block;
+    /* تعريف تغيير لون الإطار */
+    @keyframes changeBorderColor {
+      0% {
+        border-color: #ffffff; /* أبيض */
+      }
+      33% {
+        border-color: #ff0000; /* أحمر */
+      }
+      66% {
+        border-color: #00ff00; /* أخضر */
+      }
+      100% {
+        border-color: #ffffff; /* أبيض */
+      }
     }
 
     footer {
@@ -223,6 +165,24 @@
       transform: translateX(-50%);
       text-align: center;
       font-size: 14px;
+      color: #00bcd4;
+    }
+
+    /* تنسيقات وسائل التواصل الاجتماعي في الأسفل */
+    footer aside {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    footer aside a {
+      color: white;
+      font-size: 24px;
+      transition: color 0.3s;
+    }
+
+    footer aside a:hover {
       color: #00bcd4;
     }
 
@@ -262,22 +222,67 @@
       color: #0097a7;
     }
 
+    /* تنسيقات النص العائم */
+    .floating-text {
+      margin-top: 10px;
+      font-size: 18px;
+      animation: changeColor 3s infinite;
+    }
+
+    @keyframes changeColor {
+      0% {
+        color: #00bcd4;
+      }
+      50% {
+        color: #ff4081; /* لون وردي */
+      }
+      100% {
+        color: #00bcd4;
+      }
+    }
+
+    /* تنسيقات قسم الرسائل الملهمة */
+    .inspirational-message {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .inspirational-message h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #00bcd4;
+    }
+
+    #daily-message {
+      font-size: 18px;
+      color: white;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
     /* تنسيقات متجاوبة للهواتف */
     @media (max-width: 768px) {
-      /* تعديل حجم الخطوط */
       .hero h1 {
-        font-size: 36px; /* تصغير حجم العنوان الرئيسي */
+        font-size: 36px;
       }
 
       .hero h2 {
-        font-size: 24px; /* تصغير حجم العنوان الثانوي */
+        font-size: 24px;
       }
 
-      #timedate {
-        font-size: 20px; /* تصغير حجم الوقت */
-      }
-
-      /* تعديل حجم الأزرار */
       .button {
         font-size: 16px;
         padding: 8px 16px;
@@ -288,55 +293,45 @@
         padding: 8px 16px;
       }
 
-      /* تعديل حجم الصورة الشخصية */
       #profile-image-container {
         width: 100px;
         height: 100px;
       }
 
-      /* تعديل موقع وسائل التواصل الاجتماعي */
-      aside {
-        left: 10px;
+      footer aside {
         gap: 10px;
       }
 
-      aside a {
+      footer aside a {
         font-size: 20px;
       }
 
-      /* تعديل موقع أيقونة الهدية */
-      .gift-icon {
-        bottom: 100px;
-        left: 10px;
+      .floating-text {
+        font-size: 16px;
       }
 
-      /* تعديل موقع النص الترحيبي */
-      .welcome-message {
-        bottom: 130px;
-        left: 40px;
+      .inspirational-message {
+        padding: 15px;
       }
 
-      /* تعديل موقع النص في الأسفل */
-      footer {
-        font-size: 12px;
+      .inspirational-message h3 {
+        font-size: 20px;
+      }
+
+      #daily-message {
+        font-size: 16px;
       }
     }
 
-    /* تنسيقات متجاوبة للهواتف الصغيرة جدًا */
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 28px; /* تصغير حجم العنوان الرئيسي أكثر */
+        font-size: 28px;
       }
 
       .hero h2 {
-        font-size: 20px; /* تصغير حجم العنوان الثانوي أكثر */
+        font-size: 20px;
       }
 
-      #timedate {
-        font-size: 18px; /* تصغير حجم الوقت أكثر */
-      }
-
-      /* تعديل حجم الأزرار */
       .button {
         font-size: 14px;
         padding: 6px 12px;
@@ -347,99 +342,192 @@
         padding: 6px 12px;
       }
 
-      /* تعديل حجم الصورة الشخصية */
       #profile-image-container {
         width: 80px;
         height: 80px;
       }
 
-      /* تعديل موقع وسائل التواصل الاجتماعي */
-      aside {
-        left: 5px;
+      footer aside {
         gap: 5px;
       }
 
-      aside a {
+      footer aside a {
         font-size: 18px;
       }
 
-      /* تعديل موقع أيقونة الهدية */
-      .gift-icon {
-        bottom: 80px;
-        left: 5px;
+      .floating-text {
+        font-size: 14px;
       }
 
-      /* تعديل موقع النص الترحيبي */
-      .welcome-message {
-        bottom: 110px;
-        left: 20px;
+      .inspirational-message {
+        padding: 10px;
       }
 
-      /* تعديل موقع النص في الأسفل */
-      footer {
-        font-size: 10px;
+      .inspirational-message h3 {
+        font-size: 18px;
+      }
+
+      #daily-message {
+        font-size: 14px;
+      }
+    }
+
+    /* تنسيقات نافذة كلمة المرور */
+    .password-popup {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .password-popup-content {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+      position: relative;
+    }
+
+    .password-popup-content input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #00bcd4;
+      border-radius: 5px;
+      background: #000;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .password-popup-content button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background: #00bcd4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .password-popup-content button:hover {
+      background: #0097a7;
+    }
+
+    .password-error {
+      color: #ff4081;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* تنسيقات الهدية */
+    .gift-box {
+      position: absolute;
+      top: -40px; /* فوق مربع حوار كلمة المرور */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1002; /* تأكد من أنه فوق نافذة كلمة المرور */
+    }
+
+    /* تنسيقات النص العائم */
+    .floating-hint {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 188, 212, 0.9);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      display: none; /* مخفي بشكل افتراضي */
+      z-index: 1003; /* فوق كل العناصر */
+      animation: floatUp 2s ease-in-out;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-40px);
       }
     }
   </style>
 </head>
 
 <body>
-  <main>
-    <!-- قسم وسائل التواصل الاجتماعي -->
-    <aside>
-      <a href="https://youtube.com/@ut8p?si=c8rGqdTkRxg_trC6" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/_lqec" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://t.me/fuckalliraq" target="_blank"><i class="fab fa-telegram"></i></a>
-    </aside>
+  <!-- نافذة كلمة المرور -->
+  <div class="password-popup" id="password-popup">
+    <div class="password-popup-content">
+      <!-- الهدية -->
+      <div class="gift-box" onclick="showPasswordHint()">
+        🎁
+      </div>
 
+      <h3>أدخل كلمة المرور:</h3>
+      <input type="password" id="password-input" placeholder="كلمة المرور">
+      <button onclick="checkPassword()">دخول</button>
+      <p class="password-error" id="password-error">كلمة المرور غير صحيحة!</p>
+    </div>
+  </div>
+
+  <!-- نص عائم يظهر عند الضغط على الهدية -->
+  <div class="floating-hint" id="floating-hint">
+    كلمة المرور هي 1234
+  </div>
+
+  <!-- خلفية الجسيمات المتحركة -->
+  <div id="particles-js"></div>
+
+  <main>
     <!-- المحتوى الرئيسي -->
     <div class="main">
       <!-- صورة المستخدم -->
       <div id="profile-image-container">
         <img id="profile-image" src="https://i.ibb.co/dLLJPkD/IMG-0261.jpg" alt="Profile Image">
-        <input type="file" id="upload-image" accept="image/*" style="display: none;">
-        <button id="update-image-button">تحديث الصورة</button>
-      </div>
-
-      <!-- التاريخ والوقت -->
-      <div id="timedate">
-        <span id="month">January</span> <span id="day">1</span>, <span id="year">0</span>
-        <br />
-        <span id="hour">12</span> :<span id="min">00</span> :<span id="s">00</span> :<span id="millisec">000</span>
       </div>
 
       <!-- نص الترحيب -->
       <div class="hero">
-        <h1>Hello! I'm Sajad,</h1>
-        <h2>a Web Developer</h2>
+        <h1>Sajad (jawad)</h1>
+        <h2></h2> <!-- يمكنك ترك هذا فارغًا أو إضافة نص آخر -->
       </div>
 
       <!-- زر الانتقال -->
-      <a href="#projects" class="button" id="toMyWorkButton">To My Work</a>
+      <a href="#about-me" class="button" id="aboutMeButton">About Me</a>
+
+      <!-- زر تشغيل الأغنية -->
+      <div class="music-container">
+        <button class="music-button" onclick="toggleMusic()">
+          <i class="fas fa-music"></i> Play Music
+        </button>
+        <!-- النص العائم -->
+        <div class="floating-text">Music Moonlight</div>
+      </div>
+
+      <!-- قسم الرسائل الملهمة -->
+      <div class="inspirational-message">
+        <h3>رسالة اليوم:</h3>
+        <p id="daily-message"></p>
+        <button id="refresh-message" class="button">رسالة جديدة</button>
+      </div>
     </div>
   </main>
-
-  <!-- زر تشغيل الأغنية -->
-  <div class="music-container">
-    <button class="music-button" onclick="toggleMusic()">
-      <i class="fas fa-music"></i> Play Music
-    </button>
-  </div>
-
-  <!-- أيقونة الهدية -->
-  <div class="gift-icon" onclick="showWelcomeMessage()">
-    <i class="fas fa-gift"></i>
-  </div>
-
-  <!-- النص الترحيبي -->
-  <div class="welcome-message" id="welcomeMessage">
-    مرحبا بك في موقعنا! يسرّنا دخولك. من فضلك قم بزيارتنا في وقت لاحق. لقد أحببناك!
-  </div>
-
-  <!-- نص في الأسفل -->
-  <footer>
-    By Sajad
-  </footer>
 
   <!-- النافذة المنبثقة -->
   <div id="popup" class="popup">
@@ -451,40 +539,18 @@
 
   <!-- عنصر الصوت -->
   <audio id="background-music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    <source src="https://od.lk/s/MF8zNTM3MzA5NTJf/None%20%E2%80%93%20Dhruv%20-%20moonlight%20%28Official%20Audio%29.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-
-  <!-- خلفية النجوم المتحركة -->
-  <canvas class="background"></canvas>
 
   <!-- مكتبة Three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- الكود الخاص بتحديث الوقت وخلفية النجوم المتحركة -->
+  <!-- مكتبة Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <!-- الكود الخاص بخلفية النجوم المتحركة -->
   <script>
-    // تحديث الوقت بشكل ديناميكي
-    function updateTime() {
-      const now = new Date();
-      const month = now.toLocaleString('default', { month: 'long' });
-      const day = now.getDate();
-      const year = now.getFullYear();
-      const hour = now.getHours().toString().padStart(2, '0');
-      const min = now.getMinutes().toString().padStart(2, '0');
-      const sec = now.getSeconds().toString().padStart(2, '0');
-      const millisec = now.getMilliseconds().toString().padStart(3, '0');
-
-      document.getElementById('month').textContent = month;
-      document.getElementById('day').textContent = day;
-      document.getElementById('year').textContent = year;
-      document.getElementById('hour').textContent = hour;
-      document.getElementById('min').textContent = min;
-      document.getElementById('s').textContent = sec;
-      document.getElementById('millisec').textContent = millisec;
-    }
-
-    setInterval(updateTime, 1); // تحديث الوقت كل مللي ثانية
-
     // تهيئة خلفية النجوم المتحركة
     let scene, camera, renderer, stars;
 
@@ -544,44 +610,12 @@
       }
     }
 
-    // التحكم في رفع الصورة
-    const profileImage = document.getElementById('profile-image');
-    const uploadImage = document.getElementById('upload-image');
-    const updateImageButton = document.getElementById('update-image-button');
-
-    profileImage.addEventListener('click', (event) => {
-      event.preventDefault();
-      uploadImage.click();
-    });
-
-    uploadImage.addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          profileImage.src = e.target.result;
-          updateImageButton.style.display = 'inline-block';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    updateImageButton.addEventListener('click', () => {
-      alert('تم تحديث الصورة بنجاح!');
-    });
-
-    // إظهار النص الترحيبي عند النقر على أيقونة الهدية
-    function showWelcomeMessage() {
-      const welcomeMessage = document.getElementById('welcomeMessage');
-      welcomeMessage.classList.toggle('show');
-    }
-
     // التحكم في النافذة المنبثقة
-    const toMyWorkButton = document.getElementById('toMyWorkButton');
+    const aboutMeButton = document.getElementById('aboutMeButton');
     const popup = document.getElementById('popup');
     const closePopup = document.querySelector('.close-popup');
 
-    toMyWorkButton.addEventListener('click', (event) => {
+    aboutMeButton.addEventListener('click', (event) => {
       event.preventDefault();
       popup.style.display = 'flex';
     });
@@ -595,7 +629,120 @@
         popup.style.display = 'none';
       }
     });
+
+    // قائمة الرسائل الملهمة
+    const messages = [
+      "لا تتوقف عن الحلم، فالأحلام هي بداية النجاح.",
+      "التحديات تصنع الشخص القوي، فلا تخف منها.",
+      "النجاح هو مجموع الجهود الصغيرة المتكررة يومياً.",
+      "كن التغيير الذي تريد أن تراه في العالم.",
+      "الفرص لا تأتي بالصدفة، بل تُصنع بالعمل الجاد.",
+      "كل يوم هو فرصة جديدة لتحقيق شيء عظيم.",
+      "الإصرار هو المفتاح لتحقيق المستحيل.",
+      "لا تنتظر الظروف المثالية، ابدأ من حيث أنت.",
+      "النجاح يبدأ عندما تبدأ أنت.",
+      "كن متفائلاً، فالمستقبل مشرق لمن يؤمن به."
+    ];
+
+    // اختيار رسالة عشوائية
+    function getRandomMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      return messages[randomIndex];
+    }
+
+    // عرض الرسالة اليومية
+    function displayDailyMessage() {
+      const messageElement = document.getElementById('daily-message');
+      if (messageElement) {
+        messageElement.textContent = getRandomMessage();
+      } else {
+        console.error("العنصر #daily-message غير موجود!");
+      }
+    }
+
+    // عرض الرسالة عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      displayDailyMessage();
+    });
+
+    // تحديث الرسالة عند النقر على الزر
+    const refreshMessageButton = document.getElementById('refresh-message');
+    if (refreshMessageButton) {
+      refreshMessageButton.addEventListener('click', function() {
+        displayDailyMessage();
+      });
+    } else {
+      console.error("زر تحديث الرسالة غير موجود!");
+    }
+
+    // تهيئة الجسيمات المتحركة
+    particlesJS.load('particles-js', 'particles.json', function() {
+      console.log('تم تحميل الجسيمات بنجاح!');
+    });
+
+    // التحكم في تكبير الصورة عند الضغط المستمر
+    const profileImage = document.getElementById('profile-image');
+
+    profileImage.addEventListener('mousedown', () => {
+      profileImage.style.transform = 'scale(1.5)'; // تكبير الصورة
+    });
+
+    profileImage.addEventListener('mouseup', () => {
+      profileImage.style.transform = 'scale(1)'; // إعادة الصورة لحجمها الأصلي
+    });
+
+    profileImage.addEventListener('mouseleave', () => {
+      profileImage.style.transform = 'scale(1)'; // إعادة الصورة لحجمها الأصلي
+    });
+
+    // لدعم الأجهزة التي تعمل باللمس
+    profileImage.addEventListener('touchstart', () => {
+      profileImage.style.transform = 'scale(1.5)'; // تكبير الصورة
+    });
+
+    profileImage.addEventListener('touchend', () => {
+      profileImage.style.transform = 'scale(1)'; // إعادة الصورة لحجمها الأصلي
+    });
+
+    // التحقق من كلمة المرور
+    const passwordPopup = document.getElementById('password-popup');
+    const passwordInput = document.getElementById('password-input');
+    const passwordError = document.getElementById('password-error');
+
+    function checkPassword() {
+      const correctPassword = "1234"; // كلمة المرور المخصصة
+      if (passwordInput.value === correctPassword) {
+        passwordPopup.style.display = "none"; // إخفاء نافذة كلمة المرور
+      } else {
+        passwordError.style.display = "block"; // عرض رسالة الخطأ
+      }
+    }
+
+    // إظهار نافذة كلمة المرور عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      passwordPopup.style.display = "flex";
+    });
+
+    // دالة لإظهار النص العائم
+    function showPasswordHint() {
+      const floatingHint = document.getElementById('floating-hint');
+      floatingHint.style.display = 'block'; // إظهار النص العائم
+
+      // إخفاء النص العائم بعد انتهاء الرسوم المتحركة
+      setTimeout(() => {
+        floatingHint.style.display = 'none';
+      }, 2000); // 2000 مللي ثانية (2 ثوانٍ)
+    }
   </script>
+
+  <!-- قسم وسائل التواصل الاجتماعي في الأسفل -->
+  <footer>
+    <aside>
+      <a href="https://youtube.com/@ut8p?si=c8rGqdTkRxg_trC6" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/_lqec" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/fuckalliraq" target="_blank"><i class="fab fa-telegram"></i></a>
+    </aside>
+  </footer>
 </body>
 
 </html>
